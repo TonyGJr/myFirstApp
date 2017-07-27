@@ -13,6 +13,8 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'projects.html',
 })
 export class ProjectsPage {
+  newProject:any = {};
+
   projects:any= [
     {
     name:'Tony',
@@ -41,5 +43,11 @@ export class ProjectsPage {
 
     test(project){
       console.log(project);
+      project.name='Hello There';
+    }
+    
+    addProject(){
+      this.projects.push(this.newProject);
+
     }
 }

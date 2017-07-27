@@ -40,5 +40,16 @@
     <div class="card-title">Madison</div>
     <div class="card-subtitle">28 Listings</div>
   </ion-card>
+  <form (submit)="addProject()">
+    <label for="name">Name:</label>
+    <input type="text" name="name" [(ngModel)]="newProject.name">
 
+    <label for="des">Description:</label>
+    <input type="text" name="description" [(ngModel)]="newProject.description">
+
+    <label for="image">Image:</label>
+    <input type="text" name="image" [(ngModel)]="newProject.image">
+    
+    <button type="submit" ion-button block>Add Project</button>
+  </form>
 </ion-content>
