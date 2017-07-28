@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 /**
  * Generated class for the ProjectsPage page.
  *
@@ -13,41 +13,38 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'projects.html',
 })
 export class ProjectsPage {
-  newProject:any = {};
 
-  projects:any= [
-    {
-    name:'Tony',
-    description: 'we work here',
-    image:'img/tony.jpg'
-    },
-      {
-        name:'Gunn',
-        description:'XYZZ',
-        image:''
-      },
-      {
-        name:'Claim Academy',
-        description: 'XYZZY',
-        image:''
-      }
-  ];
+  newProject: any = {};
+  projects: any = [];
+  items: FirebaseListObservable<any[]>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private db: AngularFireDatabase
+  ) {
 
+    //ON LOAD
+    this.items = this.db.list('/items');
+    console.log(this.items);
+    // storage.get('projects').then((data)) => {
+    //   this.projects = data;
+    //   if (!this.projects) {
+    //     this.projects = [];
+    //   }
+    // }
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProjectsPage');
   }
 
-    test(project){
-      console.log(project);
-      project.name='Hello There';
-    }
-    
-    addProject(){
-      this.projects.push(this.newProject);
+  test(project) {
+    console.log(project);
+    project.name = 'Hello There';
+  }
 
-    }
+  addProject() {
+    this.projects.push(this.newProject);
+  }
 }
